@@ -18,12 +18,12 @@
 %     2 → NMC  — Sanyo UR18650E
 %
 %   Supported BOL variability test cases (FLAG_AGINGMODEL_TC):
-%     1 -> TestCase1,  2 -> TestCase2,  3 -> TestCase3
+%     1 -> TestCase1,  2 -> TestCase2
 %
 % ----------------------------------------------------------------------------
 % INPUTS:
 %   FLAG_CHEMISTRY      - Chemistry selector: 1 = LFP, 2 = NMC             [-]
-%   FLAG_AGINGMODEL_TC  - BOL variability test case selector: 1, 2, or 3   [-]
+%   FLAG_AGINGMODEL_TC  - BOL variability test case selector: 1, 2         [-]
 %   T_i_degC            - Cell temperature(s), size [N_ser × 1]            [°C]
 %
 % OUTPUTS:
@@ -95,7 +95,7 @@ function [CellModel_Elec, CellModel_Aging, ...
     % BOL variability: load spread parameters for the selected chemistry
     %   and test case.
     % ========================================================================
-    AgingModel_BOL_Loaded = load("AgingModel_BOL_Variation_2024_02_15.mat");
+    AgingModel_BOL_Loaded = load("AgingModel_BOL_Variation_2024_04_18.mat");
     AgingModel_BOL        = AgingModel_BOL_Loaded.AgingModel_BOL;
 
     % Select chemistry-specific BOL variation data.
@@ -112,8 +112,6 @@ function [CellModel_Elec, CellModel_Aging, ...
         BOL_TestCase = AgingModel_BOLVariation.TestCase1;
     elseif (FLAG_AGINGMODEL_TC == 2)
         BOL_TestCase = AgingModel_BOLVariation.TestCase2;
-    elseif (FLAG_AGINGMODEL_TC == 3)
-        BOL_TestCase = AgingModel_BOLVariation.TestCase3;
     else
         fprintf("ERROR: Wrong aging model test case code.\n");
     end
